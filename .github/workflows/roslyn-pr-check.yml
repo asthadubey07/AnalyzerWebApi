@@ -15,16 +15,15 @@ jobs:
       - name: 🛠️ Setup .NET SDK
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8.0.x'
+          dotnet-version: '9.0.x' # Adjust if using .NET 8 or lower
 
       - name: 🔍 Get Changed C# Files
         id: changed_cs
         run: |
-          CHANGED_CS=$(git diff --name-only origin/${{ github.base_ref }}...${{ github.head_ref }} -- '*.cs')
+          git fetch origin
+          CHANGED_CS=$(git diff --name-only origin/${{ github.base_ref }}...origin/${{ github.head_ref }} -- '*.cs')
           echo "CHANGED_CS=$CHANGED_CS" >> $GITHUB_ENV
-          echo "changed_cs_files<<EOF" >> $GITHUB_ENV
-          echo "$CHANGED_CS" >> $GITHUB_ENV
-          echo "EOF" >> $GITHUB_ENV
+          echo "$CHANGED_CS" > changed_files.txt
 
       - name: ✅ Skip analysis if no C# files were modified
         if: env.CHANGED_CS == ''
@@ -44,11 +43,9 @@ jobs:
 
       - name: 🚦 Analyze Changed C# Files Only
         run: |
-          echo "Analyzing changed files:"
-          echo "${{ env.changed_cs_files }}"
           EXIT_CODE=0
-          for file in ${{ env.changed_cs_files }}; do
-            echo "🔍 Building file: $file"
+          while IFS= read -r file; do
+            echo "🔍 Analyzing file: $file"
             dotnet build "$file" -warnaserror || EXIT_CODE=1
-          done
+          done < changed_files.txt
           exit $EXIT_CODE
