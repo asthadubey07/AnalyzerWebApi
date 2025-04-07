@@ -22,4 +22,12 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <EditorConfigFiles Remove="C:\Users\ADwivedi\MyAnalyzerEnabledApi\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="C:\Users\ADwivedi\MyAnalyzerEnabledApi\.editorconfig" />
+  </ItemGroup>
+
 </Project>

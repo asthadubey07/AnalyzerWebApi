@@ -1,0 +1,19 @@
+root = true
+
+[*.cs]
+
+# Treat warnings as errors
+warn_as_error = true
+
+# Nullable reference types
+dotnet_diagnostic.CS8618.severity = warning
+dotnet_diagnostic.CS8602.severity = warning
+
+# Dead code (unused members)
+dotnet_diagnostic.IDE0051.severity = warning
+
+# Missing XML comments on public members
+dotnet_diagnostic.CS1591.severity = warning
+
+# Roslynator: Require XML documentation
+dotnet_diagnostic.RCS1090.severity = warning

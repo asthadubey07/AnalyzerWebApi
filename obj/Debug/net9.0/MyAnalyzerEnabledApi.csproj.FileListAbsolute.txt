@@ -31,3 +31,4 @@ C:\Users\ADwivedi\MyAnalyzerEnabledApi\obj\Debug\net9.0\refint\MyAnalyzerEnabled
 C:\Users\ADwivedi\MyAnalyzerEnabledApi\obj\Debug\net9.0\MyAnalyzerEnabledApi.pdb
 C:\Users\ADwivedi\MyAnalyzerEnabledApi\obj\Debug\net9.0\MyAnalyzerEnabledApi.genruntimeconfig.cache
 C:\Users\ADwivedi\MyAnalyzerEnabledApi\obj\Debug\net9.0\ref\MyAnalyzerEnabledApi.dll
+C:\Users\ADwivedi\MyAnalyzerEnabledApi\obj\Debug\net9.0\MyAnalyzerEnabledApi.sourcelink.json
