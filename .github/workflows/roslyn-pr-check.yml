@@ -15,7 +15,7 @@ jobs:
       - name: 🛠️ Setup .NET SDK
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '9.0.x' # Adjust if using .NET 8 or lower
+          dotnet-version: '8.0.x' # Change to 9.0.x only if you're using .NET 9 preview
 
       - name: 🔍 Get Changed C# Files
         id: changed_cs
@@ -41,11 +41,19 @@ jobs:
             done
           fi
 
-      - name: 🚦 Analyze Changed C# Files Only
+      - name: 🏗️ Build Solution and Filter Warnings for Changed Files
         run: |
+          echo "🏗️ Building solution with analyzers enabled..."
+          dotnet build MyAnalyzerEnabledApi.sln -warnaserror > build.log || true
+
+          echo "🔍 Scanning build log for issues in changed files..."
           EXIT_CODE=0
           while IFS= read -r file; do
-            echo "🔍 Analyzing file: $file"
-            dotnet build "$file" -warnaserror || EXIT_CODE=1
+            echo "🔍 Checking diagnostics in: $file"
+            if grep "$file" build.log | grep -E 'warning|error'; then
+              echo "❌ Found Roslyn warnings/errors in $file"
+              EXIT_CODE=1
+            fi
           done < changed_files.txt
+
           exit $EXIT_CODE
