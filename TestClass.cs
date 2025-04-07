@@ -2,32 +2,46 @@
 
 namespace WorkflowTest
 {
-    // CS1591: Missing XML comment for publicly visible type or member
+    /// <summary>
+    /// Represents a test class demonstrating various coding practices.
+    /// </summary>
     public class TestClass
     {
-        // CS8618: Non-nullable field is uninitialized
-        public string UninitializedProperty { get; set; }
+        /// <summary>
+        /// Gets or sets a property that is initialized to ensure non-nullability.
+        /// </summary>
+        public string InitializedProperty { get; set; }
 
-        // CS1591: Missing XML comment for publicly visible type or member
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TestClass"/> class.
+        /// </summary>
         public TestClass()
         {
-            // CS8602: Dereference of a possibly null reference
+            InitializedProperty = string.Empty; // CS8618 resolved by initializing the property.
+
             string? nullableString = GetNullableString();
-            Console.WriteLine(nullableString.Length);
+            if (nullableString != null)
+            {
+                Console.WriteLine(nullableString.Length); // CS8602 resolved by null-checking.
+            }
+            else
+            {
+                Console.WriteLine("String is null.");
+            }
         }
 
-        // CS1591: Missing XML comment for publicly visible type or member
-        public void PublicMethodWithoutComment()
+        /// <summary>
+        /// A public method with XML documentation.
+        /// </summary>
+        public void PublicMethodWithComment()
         {
-            // Method intentionally left empty to trigger RCS1090
+            // Method implementation.
         }
 
-        // IDE0051: Private member is unused
-        private void UnusedPrivateMethod()
-        {
-            Console.WriteLine("This method is never used.");
-        }
-
+        /// <summary>
+        /// Gets a nullable string.
+        /// </summary>
+        /// <returns>A string that may be null.</returns>
         private string? GetNullableString()
         {
             return null;
