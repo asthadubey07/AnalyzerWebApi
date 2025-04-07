@@ -1,32 +1,50 @@
-﻿// <copyright>
-// Copyright (c) 2025 Astha.
-// Licensed under the MIT License.
-// </copyright>
+﻿using System;
 
-namespace MyAnalyzerEnabledApi
+namespace WorkflowTest
 {
+    /// <summary>
+    /// Represents a test class demonstrating various coding practices.
+    /// </summary>
     public class TestClass
     {
-        private string? name;
+        /// <summary>
+        /// Gets or sets a property that is initialized to ensure non-nullability.
+        /// </summary>
+        public string InitializedProperty { get; set; }
 
-        public string? Name
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TestClass"/> class.
+        /// </summary>
+        public TestClass()
         {
-            get => name;
-            set => name = value;
-        }
+            InitializedProperty = string.Empty; // CS8618 resolved by initializing the property.
 
-        public void DoStuff()
-        {
-            string? risky = null;
-
-            if (risky != null)
+            string? nullableString = GetNullableString();
+            if (nullableString != null)
             {
-                Console.WriteLine(risky.Length);
+                Console.WriteLine(nullableString.Length); // CS8602 resolved by null-checking.
             }
             else
             {
-                Console.WriteLine("risky is null");
+                Console.WriteLine("String is null.");
             }
+        }
+
+        /// <summary>
+        /// A public method with XML documentation.
+        /// </summary>
+        public void PublicMethodWithComment()
+        {
+            // Method implementation.
+        }
+
+        /// <summary>
+        /// Gets a nullable string.
+        /// </summary>
+        /// <returns>A string that may be null.</returns>
+        private string? GetNullableString()
+        {
+            return null;
         }
     }
 }
