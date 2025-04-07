@@ -1,0 +1,54 @@
+name: Roslyn Analyzer PR Check
+
+on:
+  pull_request:
+
+jobs:
+  analyze-cs-files:
+    name: Run Roslyn Analyzer on Changed C# Files
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🛎️ Checkout Code
+        uses: actions/checkout@v4
+
+      - name: 🛠️ Setup .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: 🔍 Get Changed C# Files
+        id: changed_cs
+        run: |
+          CHANGED_CS=$(git diff --name-only origin/${{ github.base_ref }}...${{ github.head_ref }} -- '*.cs')
+          echo "CHANGED_CS=$CHANGED_CS" >> $GITHUB_ENV
+          echo "changed_cs_files<<EOF" >> $GITHUB_ENV
+          echo "$CHANGED_CS" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+
+      - name: ✅ Skip analysis if no C# files were modified
+        if: env.CHANGED_CS == ''
+        run: |
+          echo "✅ No .cs files changed in PR. Skipping Roslyn analysis."
+          exit 0
+
+      - name: 🔧 Restore Solution or Projects
+        run: |
+          if [ -f "MyAnalyzerEnabledApi.sln" ]; then
+            dotnet restore MyAnalyzerEnabledApi.sln
+          else
+            for proj in $(find . -name '*.csproj'); do
+              dotnet restore "$proj"
+            done
+          fi
+
+      - name: 🚦 Analyze Changed C# Files Only
+        run: |
+          echo "Analyzing changed files:"
+          echo "${{ env.changed_cs_files }}"
+          EXIT_CODE=0
+          for file in ${{ env.changed_cs_files }}; do
+            echo "🔍 Building file: $file"
+            dotnet build "$file" -warnaserror || EXIT_CODE=1
+          done
+          exit $EXIT_CODE
