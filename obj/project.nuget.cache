@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "LgwqJ+DZY+w=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\ADwivedi\\MyAnalyzerEnabledApi\\MyAnalyzerEnabledApi.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ADwivedi\\.nuget\\packages\\microsoft.aspnetcore.openapi\\9.0.1\\microsoft.aspnetcore.openapi.9.0.1.nupkg.sha512",
+    "C:\\Users\\ADwivedi\\.nuget\\packages\\microsoft.codeanalysis.netanalyzers\\8.0.0\\microsoft.codeanalysis.netanalyzers.8.0.0.nupkg.sha512",
+    "C:\\Users\\ADwivedi\\.nuget\\packages\\microsoft.openapi\\1.6.17\\microsoft.openapi.1.6.17.nupkg.sha512",
+    "C:\\Users\\ADwivedi\\.nuget\\packages\\roslynator.analyzers\\4.0.0\\roslynator.analyzers.4.0.0.nupkg.sha512",
+    "C:\\Users\\ADwivedi\\.nuget\\packages\\stylecop.analyzers\\1.2.0-beta.435\\stylecop.analyzers.1.2.0-beta.435.nupkg.sha512",
+    "C:\\Users\\ADwivedi\\.nuget\\packages\\stylecop.analyzers.unstable\\1.2.0.435\\stylecop.analyzers.unstable.1.2.0.435.nupkg.sha512"
+  ],
+  "logs": []
+}

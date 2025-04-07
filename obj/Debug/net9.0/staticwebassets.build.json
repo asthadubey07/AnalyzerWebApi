@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "OrMvYuneuOFxdNwSE65dytKj3f3xlwJcHbv+yZt6un0=",
+  "Source": "MyAnalyzerEnabledApi",
+  "BasePath": "_content/MyAnalyzerEnabledApi",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
