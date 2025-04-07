@@ -1,32 +1,36 @@
-﻿// <copyright>
-// Copyright (c) 2025 Astha.
-// Licensed under the MIT License.
-// </copyright>
+﻿using System;
 
-namespace MyAnalyzerEnabledApi
+namespace WorkflowTest
 {
+    // CS1591: Missing XML comment for publicly visible type or member
     public class TestClass
     {
-        private string? name;
+        // CS8618: Non-nullable field is uninitialized
+        public string UninitializedProperty { get; set; }
 
-        public string? Name
+        // CS1591: Missing XML comment for publicly visible type or member
+        public TestClass()
         {
-            get => name;
-            set => name = value;
+            // CS8602: Dereference of a possibly null reference
+            string? nullableString = GetNullableString();
+            Console.WriteLine(nullableString.Length);
         }
 
-        public void DoStuff()
+        // CS1591: Missing XML comment for publicly visible type or member
+        public void PublicMethodWithoutComment()
         {
-            string? risky = null;
+            // Method intentionally left empty to trigger RCS1090
+        }
 
-            if (risky != null)
-            {
-                Console.WriteLine(risky.Length);
-            }
-            else
-            {
-                Console.WriteLine("risky is null");
-            }
+        // IDE0051: Private member is unused
+        private void UnusedPrivateMethod()
+        {
+            Console.WriteLine("This method is never used.");
+        }
+
+        private string? GetNullableString()
+        {
+            return null;
         }
     }
 }
